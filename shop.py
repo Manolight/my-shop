@@ -73,6 +73,8 @@ def Product_quantity():
     Shop_btn.click()
     HTML_cat = driver.find_element(By.CSS_SELECTOR, ".cat-item-19 a")
     HTML_cat.click()
+    time.sleep(3)
+    driver.execute_script("window.scrollBy(0, 300);")
     Pr_field = driver.find_elements(By.CSS_SELECTOR, "div h3")
     Pr_field_quantity = len(Pr_field)
     if Pr_field_quantity == 3:
@@ -317,7 +319,5 @@ while True:
     else:
         cprint("Вы ввели неправильное значение!", 'red')
 
-
 driver.quit()
-
 exit(0)
