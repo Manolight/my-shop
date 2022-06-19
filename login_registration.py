@@ -22,8 +22,11 @@ def Registration() :
     time.sleep(3)
     Reg_btn = driver.find_element(By.CSS_SELECTOR, "input[name='register']")
     Reg_btn.click()
+
     driver.quit()
     exit(0)
+
+Registration()
 
 
 #####Login#####
@@ -50,6 +53,11 @@ def Login():
         print("Element is missing!")
     driver.quit()
     exit(0)
+
+
+Login()
+
+
 
 #####
 

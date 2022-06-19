@@ -10,6 +10,11 @@ from selenium.webdriver.support.select import Select
 
 #####Login#####
 def Login():
+    driver = webdriver.Chrome()
+    driver.get("http://practice.automationtesting.in/")
+    driver.maximize_window()
+    driver.implicitly_wait(5)
+    wait = WebDriverWait(driver, 10)
     My_account_btn = driver.find_element(By.CSS_SELECTOR, "#menu-item-50 a")
     My_account_btn.click()
     Username = driver.find_element(By.ID, "username")
@@ -140,6 +145,7 @@ def Product_display_discount():
     Book_preview.click()
     Zoom_close_btn = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "pp_close")))
     Zoom_close_btn.click()
+    cprint("Passed!", 'green')
     driver.quit()
 
 
@@ -204,7 +210,6 @@ def Cart_operations():
     Coupon_btn = driver.find_element(By.NAME, "apply_coupon")
     Coupon_btn.click()
     Coup_error_text = driver.find_element(By.CSS_SELECTOR, ".woocommerce-error li").text
-    print(Coup_error_text)
     if Coup_error_text == "Please enter a coupon code.":
         cprint("Passed!", 'green')
     else:
@@ -313,6 +318,6 @@ while True:
         cprint("Вы ввели неправильное значение!", 'red')
 
 
-
 driver.quit()
+
 exit(0)
