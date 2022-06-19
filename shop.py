@@ -8,11 +8,20 @@ from termcolor import cprint
 from selenium.webdriver.support.select import Select
 
 
-driver = webdriver.Chrome()
-
-
 #####Login#####
 def Login():
+    My_account_btn = driver.find_element(By.CSS_SELECTOR, "#menu-item-50 a")
+    My_account_btn.click()
+    Username = driver.find_element(By.ID, "username")
+    Username.send_keys("9520442@gmail.com")
+    Passwd = driver.find_element(By.ID, "password")
+    Passwd.send_keys("RjhzdsqCkjy")
+    Login_btn = driver.find_element(By.NAME, "login")
+    Login_btn.click()
+
+#####Отображение страницы товара#####
+def Product_page_display():
+    driver = webdriver.Chrome()
     driver.get("http://practice.automationtesting.in/")
     driver.maximize_window()
     driver.implicitly_wait(5)
@@ -25,14 +34,6 @@ def Login():
     Passwd.send_keys("RjhzdsqCkjy")
     Login_btn = driver.find_element(By.NAME, "login")
     Login_btn.click()
-
-#####Отображение страницы товара#####
-def Product_page_display():
-    driver.get("http://practice.automationtesting.in/")
-    driver.maximize_window()
-    driver.implicitly_wait(5)
-    wait = WebDriverWait(driver, 10)
-    Login()
     Shop_btn = driver.find_element(By.ID, "menu-item-40")
     Shop_btn.click()
     HTML5_book = driver.find_element(By.CLASS_NAME, "post-181")
@@ -50,11 +51,19 @@ def Product_page_display():
 
 #####Количество товаров в категории#####
 def Product_quantity():
+    driver = webdriver.Chrome()
     driver.get("http://practice.automationtesting.in/")
     driver.maximize_window()
     driver.implicitly_wait(5)
     wait = WebDriverWait(driver, 10)
-    Login()
+    My_account_btn = driver.find_element(By.CSS_SELECTOR, "#menu-item-50 a")
+    My_account_btn.click()
+    Username = driver.find_element(By.ID, "username")
+    Username.send_keys("9520442@gmail.com")
+    Passwd = driver.find_element(By.ID, "password")
+    Passwd.send_keys("RjhzdsqCkjy")
+    Login_btn = driver.find_element(By.NAME, "login")
+    Login_btn.click()
     Shop_btn = driver.find_element(By.ID, "menu-item-40")
     Shop_btn.click()
     HTML_cat = driver.find_element(By.CSS_SELECTOR, ".cat-item-19 a")
@@ -71,11 +80,19 @@ def Product_quantity():
 
 #####Сортировка товаров#####
 def Sort_products():
+    driver = webdriver.Chrome()
     driver.get("http://practice.automationtesting.in/")
     driver.maximize_window()
     driver.implicitly_wait(5)
     wait = WebDriverWait(driver, 10)
-    Login()
+    My_account_btn = driver.find_element(By.CSS_SELECTOR, "#menu-item-50 a")
+    My_account_btn.click()
+    Username = driver.find_element(By.ID, "username")
+    Username.send_keys("9520442@gmail.com")
+    Passwd = driver.find_element(By.ID, "password")
+    Passwd.send_keys("RjhzdsqCkjy")
+    Login_btn = driver.find_element(By.NAME, "login")
+    Login_btn.click()
     Shop_btn = driver.find_element(By.ID, "menu-item-40")
     Shop_btn.click()
     Sort_by_selector = driver.find_element(By.NAME, "orderby")
@@ -92,14 +109,23 @@ def Sort_products():
         cprint("Сортировка установлена верно!", "green")
     else:
         cprint("Сортировка установлена неверно!", "red")
+    driver.quit()
 
 #####Отображение, скидка товара#####
 def Product_display_discount():
+    driver = webdriver.Chrome()
     driver.get("http://practice.automationtesting.in/")
     driver.maximize_window()
     driver.implicitly_wait(5)
     wait = WebDriverWait(driver, 10)
-    Login()
+    My_account_btn = driver.find_element(By.CSS_SELECTOR, "#menu-item-50 a")
+    My_account_btn.click()
+    Username = driver.find_element(By.ID, "username")
+    Username.send_keys("9520442@gmail.com")
+    Passwd = driver.find_element(By.ID, "password")
+    Passwd.send_keys("RjhzdsqCkjy")
+    Login_btn = driver.find_element(By.NAME, "login")
+    Login_btn.click()
     Shop_btn = driver.find_element(By.ID, "menu-item-40")
     Shop_btn.click()
     Android_guide = driver.find_element(By.CSS_SELECTOR, ".post-169 h3")
@@ -114,9 +140,12 @@ def Product_display_discount():
     Book_preview.click()
     Zoom_close_btn = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "pp_close")))
     Zoom_close_btn.click()
+    driver.quit()
+
 
 #####Проверка цены в корзине#####
 def Cart_price_check():
+    driver = webdriver.Chrome()
     driver.get("http://practice.automationtesting.in/")
     driver.maximize_window()
     driver.implicitly_wait(5)
@@ -128,7 +157,8 @@ def Cart_price_check():
     Add_btn.click()
     time.sleep(3)
     Cart_btn = driver.find_element(By.CLASS_NAME, "wpmenucartli")
-    Cart_products_quantity = Cart_btn.text
+    Cart_btn_quantity = driver.find_element(By.CSS_SELECTOR, ".cartcontents")
+    Cart_products_quantity = Cart_btn_quantity.text
     Cart_btn_price = driver.find_element(By.CSS_SELECTOR, ".wpmenucart-contents .amount")
     Cart_btn_price_text = Cart_btn_price.text
     assert Cart_btn_price_text == "₹180.00"
@@ -137,10 +167,12 @@ def Cart_price_check():
     time.sleep(3)
     EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".cart-subtotal .amount"), "₹180.00")
     EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".order-total .amount"), "₹189.00")
-
+    cprint("Passed!", 'green')
+    driver.quit()
 
 #####Работа в корзине#####
 def Cart_operations():
+    driver = webdriver.Chrome()
     driver.get("http://practice.automationtesting.in/")
     driver.maximize_window()
     driver.implicitly_wait(5)
@@ -177,9 +209,10 @@ def Cart_operations():
         cprint("Passed!", 'green')
     else:
         cprint("Error!", 'red')
-
+    driver.quit()
 ######Покупка товара######
 def Product_checkout():
+    driver = webdriver.Chrome()
     driver.get("http://practice.automationtesting.in/")
     driver.maximize_window()
     driver.implicitly_wait(5)
@@ -237,6 +270,47 @@ def Product_checkout():
         cprint("Passed!", 'green')
     else:
         cprint("ERROR!", 'red')
+    driver.quit()
+
+print("###############Welcome!#################")
+print("Тесты в категории")
+while True:
+    print("1. Отображение страницы товара")
+    print("2. Количество товаров в категории")
+    print("3. Сортировка товаров")
+    print("4. Отображение, скидка товара")
+    print("5. Проверка цены в корзине")
+    print("6. Работа в корзине")
+    print("7. Покупка товара")
+    print("8. Все тесты")
+    print("9. Выход")
+    Command = input("Выберите пункт: ")
+    if Command == "1":
+        Product_page_display()
+    elif Command == "2":
+        Product_quantity()
+    elif Command == "3":
+        Sort_products()
+    elif Command == "4":
+        Product_display_discount()
+    elif Command == "5":
+        Cart_price_check()
+    elif Command == "6":
+        Cart_operations()
+    elif Command == "7":
+        Product_checkout()
+    elif Command == "8":
+        Product_page_display()
+        Product_quantity()
+        Sort_products()
+        Product_display_discount()
+        Cart_price_check()
+        Cart_operations()
+        Product_checkout()
+    elif Command == "9":
+        exit(0)
+    else:
+        cprint("Вы ввели неправильное значение!", 'red')
 
 
 
